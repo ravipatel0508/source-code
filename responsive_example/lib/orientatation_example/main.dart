@@ -28,13 +28,11 @@ class MyHomePage extends StatelessWidget {
         title: Text(title),
         backgroundColor: Colors.brown[200],
       ),
-      // body: OrientationBuilder(
-      //   builder: (BuildContext context, Orientation orientation) {
-      //     log(MediaQuery.of(context).orientation.toString());
-      //     return orientation == Orientation.portrait ? _buildVerticalLayout() : _buildHorizontalLayout();
-      //   },
-      // ),
-      body: MediaQuery.of(context).orientation == Orientation.portrait ? _buildVerticalLayout() : _buildHorizontalLayout(),
+      body: OrientationBuilder(
+        builder: (BuildContext context, Orientation orientation) {
+          return orientation == Orientation.portrait ? _buildVerticalLayout() : _buildHorizontalLayout();
+        },
+      ),
     );
   }
 }
@@ -44,7 +42,6 @@ Widget _buildVerticalLayout() {
     child: Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
-        const SizedBox(height: 30),
         Column(
           children: [
             CircleAvatar(
@@ -62,15 +59,12 @@ Widget _buildVerticalLayout() {
             ),
           ],
         ),
-        const SizedBox(height: 20),
         ListView.separated(
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           itemBuilder: (BuildContext context, int index) {
-            return ListTile(
-              title: Text(
-                index % 2 != 0 ? 'Follow @bugs_fixes' : '👍🏻 Like Bugs and Fixes',
-              ),
+            return const ListTile(
+              title: Text('Demo Data'),
             );
           },
           separatorBuilder: (BuildContext context, int index) => const Divider(),
@@ -110,10 +104,8 @@ Widget _buildHorizontalLayout() {
         child: ListView.separated(
           shrinkWrap: true,
           itemBuilder: (BuildContext context, int index) {
-            return ListTile(
-              title: Text(
-                index % 2 != 0 ? 'Follow @bugs_fixes' : '👍🏻 Like Bugs and Fixes',
-              ),
+            return const ListTile(
+              title: Text('Demo Data'),
             );
           },
           separatorBuilder: (BuildContext context, int index) => const Divider(),
