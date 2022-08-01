@@ -30,9 +30,7 @@ class _MyAppState extends State<MyApp> {
               groupValue: _themeMode,
               value: ThemeMode.light,
               onChanged: (ThemeMode? value) {
-                setState(() {
-                  _themeMode = value;
-                });
+                setState(() => _themeMode = value);
               },
             ),
             RadioListTile<ThemeMode>(
