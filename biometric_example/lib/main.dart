@@ -2,6 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+/// This code is just a simple DEMO of how to use the biometrics.
 // ignore_for_file: public_member_api_docs
 
 import 'dart:async';
@@ -114,7 +115,7 @@ class _MyAppState extends State<MyApp> {
         _authorized = 'Authenticating';
       });
       authenticated = await auth.authenticate(
-        localizedReason: 'Scan your fingerprint (or face or whatever) to authenticate',
+        localizedReason: 'Scan your fingerprint or face to authenticate',
         options: const AuthenticationOptions(
           useErrorDialogs: true,
           stickyAuth: true,
@@ -151,38 +152,40 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Plugin example app'),
-        ),
+        appBar: AppBar(title: const Text('Biometrics Demo'), centerTitle: true, backgroundColor: Colors.blueGrey),
         body: ListView(
           padding: const EdgeInsets.only(top: 30),
           children: <Widget>[
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                if (_supportState == _SupportState.unknown)
-                  const CircularProgressIndicator()
-                else if (_supportState == _SupportState.supported)
-                  const Text('This device is supported')
-                else
-                  const Text('This device is not supported'),
-                const Divider(height: 100),
-                Text('Can check biometrics: $_canCheckBiometrics\n'),
-                ElevatedButton(
-                  onPressed: _checkBiometrics,
-                  child: const Text('Check biometrics'),
-                ),
-                const Divider(height: 100),
-                Text('Available biometrics: $_availableBiometrics\n'),
-                ElevatedButton(
-                  onPressed: _getAvailableBiometrics,
-                  child: const Text('Get available biometrics'),
-                ),
-                const Divider(height: 100),
+                // if (_supportState == _SupportState.unknown)
+                //   const CircularProgressIndicator()
+                // else if (_supportState == _SupportState.supported)
+                //   const Text('This device is supported')
+                // else
+                //   const Text('This device is not supported'),
+                // const Divider(height: 100),
+                // Text('Can check biometrics: $_canCheckBiometrics\n'),
+                // ElevatedButton(
+                //   style: ElevatedButton.styleFrom(primary: Colors.blueGrey),
+                //   onPressed: _checkBiometrics,
+                //   child: const Text('Check biometrics'),
+                // ),
+                // const Divider(height: 100),
+                // Text('Available biometrics: $_availableBiometrics\n'),
+                // ElevatedButton(
+                //   style: ElevatedButton.styleFrom(primary: Colors.blueGrey),
+                //   onPressed: _getAvailableBiometrics,
+                //   child: const Text('Get available biometrics'),
+                // ),
+                // const Divider(height: 100),
                 Text('Current State: $_authorized\n'),
                 if (_isAuthenticating)
                   ElevatedButton(
+                    style: ElevatedButton.styleFrom(primary: Colors.blueGrey),
                     onPressed: _cancelAuthentication,
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
@@ -196,6 +199,7 @@ class _MyAppState extends State<MyApp> {
                   Column(
                     children: <Widget>[
                       ElevatedButton(
+                        style: ElevatedButton.styleFrom(primary: Colors.blueGrey),
                         onPressed: _authenticate,
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
@@ -206,6 +210,7 @@ class _MyAppState extends State<MyApp> {
                         ),
                       ),
                       ElevatedButton(
+                        style: ElevatedButton.styleFrom(primary: Colors.blueGrey),
                         onPressed: _authenticateWithBiometrics,
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
