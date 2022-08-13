@@ -61,32 +61,34 @@ class _SnackBarExampleState extends State<SnackBarExample> {
         backgroundColor: Colors.blueGrey,
         centerTitle: true,
       ),
-      body: Center(
+      body: Align(
+        alignment: Alignment.bottomCenter,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            ElevatedButton(
-              onPressed: () => ScaffoldMessenger.of(context).showSnackBar(simpleSnackBar),
-              child: const Text('Simple SnackBar'),
-            ),
-            ElevatedButton(
-              onPressed: () => ScaffoldMessenger.of(context)
-                ..hideCurrentSnackBar()
-                ..showSnackBar(floatingSnackBar),
-              child: const Text('Floating SnackBar'),
-            ),
-            ElevatedButton(
-              onPressed: () => ScaffoldMessenger.of(context)
-                ..removeCurrentSnackBar()
-                ..showSnackBar(actionSnackBar),
-              child: const Text('Action SnackBar'),
-            ),
+            // ElevatedButton(
+            //   onPressed: () => ScaffoldMessenger.of(context).showSnackBar(simpleSnackBar),
+            //   child: const Text('Simple SnackBar'),
+            // ),
+            // ElevatedButton(
+            //   onPressed: () => ScaffoldMessenger.of(context)
+            //     ..hideCurrentSnackBar()
+            //     ..showSnackBar(floatingSnackBar),
+            //   child: const Text('Floating SnackBar'),
+            // ),
+            // ElevatedButton(
+            //   onPressed: () => ScaffoldMessenger.of(context)
+            //     ..removeCurrentSnackBar()
+            //     ..showSnackBar(actionSnackBar),
+            //   child: const Text('Action SnackBar'),
+            // ),
             ElevatedButton(
               onPressed: () => ScaffoldMessenger.of(context)
                 ..clearSnackBars()
                 ..showSnackBar(customSnackBar),
               child: const Text('Custom SnackBar'),
             ),
+            SizedBox(height: 90),
           ],
         ),
       ),
