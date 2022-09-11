@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
+import 'package:flutter/services.dart';
+
 class RandomPasswordGenerator extends StatefulWidget {
   const RandomPasswordGenerator({super.key});
 
@@ -74,11 +76,36 @@ class _RandomPasswordGeneratorState extends State<RandomPasswordGenerator> {
                       fontSize: 20,
                     ),
                   )
-                : Text(
-                    password.join(),
-                    style: const TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.w500,
+                : FittedBox(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8.0),
+                          child: Text(
+                            password.join(),
+                            style: const TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 5),
+                        IconButton(
+                          icon: const Icon(Icons.copy),
+                          tooltip: 'Copy Password',
+                          onPressed: () {
+                            Clipboard.setData(ClipboardData(text: password.join()));
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                behavior: SnackBarBehavior.floating,
+                                content: Text('Password Copied'),
+                              ),
+                            );
+                          },
+                        )
+                      ],
                     ),
                   ),
             const SizedBox(height: 20),
