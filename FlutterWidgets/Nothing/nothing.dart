@@ -1,14 +1,20 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class Nothing extends Widget {
-  const Nothing({super.key});
+  const Nothing({Key? key}) : super(key: key);
 
   @override
-  Element createElement() => _NothingElement(this);
+  Element createElement() => _NilElement(this);
 }
 
-class _NothingElement extends Element {
-  _NothingElement(super.widget);
+class _NilElement extends Element {
+  _NilElement(Nothing widget) : super(widget);
+
+  @override
+  void mount(Element? parent, dynamic newSlot) {
+    assert(parent is! MultiChildRenderObjectElement, "You are using Nothing under a MultiChildRenderObjectElement.");
+    super.mount(parent, newSlot);
+  }
 
   @override
   bool get debugDoingBuild => false;
