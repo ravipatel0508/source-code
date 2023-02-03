@@ -3,3 +3,6 @@ flutter_widgets/
 
 all_flutter_package_examples/
 login_ui/
+spotify_clone/
+
+!.gitignore
