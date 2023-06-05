@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:spotify_clone/view/signin.dart';
+import 'package:spotify_clone/view/song_player.dart';
 
 void main() {
   // system overlays
@@ -18,7 +18,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const SigninScreen(),
+      // home: const SigninScreen(),
+      home: const AudioPlayerScreen(),
     );
   }
 }

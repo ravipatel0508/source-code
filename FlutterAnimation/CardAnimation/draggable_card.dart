@@ -20,21 +20,20 @@ class _DraggableExampleState extends State<DraggableExample> {
           height: 150,
           width: 150,
           decoration: BoxDecoration(
-            color: const Color(0xff8639FB),
+            color: Colors.blueGrey[700],
             borderRadius: const BorderRadius.all(
               Radius.circular(5),
             ),
             boxShadow: [
               BoxShadow(
-                color: const Color(0xff8639FB).withOpacity(0.7),
+                color: Colors.blueGrey.withOpacity(0.7),
                 blurRadius: 30,
               ),
             ],
           ),
           child: const Center(
             child: Text(
-              '''Drag it
-by @bugs_fixes''',
+              'Drag it',
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.w500,
@@ -57,22 +56,27 @@ class DraggableCard extends StatefulWidget {
   State<DraggableCard> createState() => _DraggableCardState();
 }
 
-class _DraggableCardState extends State<DraggableCard> with SingleTickerProviderStateMixin {
+class _DraggableCardState extends State<DraggableCard>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
   var _dragAlignment = Alignment.center;
   late Animation<Alignment> _animation;
 
-  final _spring = const SpringDescription(mass: 10, stiffness: 1000, damping: 0.9);
+  final _spring =
+      const SpringDescription(mass: 10, stiffness: 1000, damping: 0.9);
 
   double _normalizeVelocity(Offset velocity, Size size) {
-    final normalizedVelocity = Offset(velocity.dx / size.width, velocity.dy / size.height);
+    final normalizedVelocity =
+        Offset(velocity.dx / size.width, velocity.dy / size.height);
     return -normalizedVelocity.distance;
   }
 
   void _runAnimation(Offset velocity, Size size) {
-    _animation = _controller.drive(AlignmentTween(begin: _dragAlignment, end: Alignment.center));
-    final simulation = SpringSimulation(_spring, 0, 0.0, _normalizeVelocity(velocity, size));
+    _animation = _controller
+        .drive(AlignmentTween(begin: _dragAlignment, end: Alignment.center));
+    final simulation =
+        SpringSimulation(_spring, 0, 0.0, _normalizeVelocity(velocity, size));
     _controller.animateWith(simulation);
   }
 
@@ -100,7 +104,8 @@ class _DraggableCardState extends State<DraggableCard> with SingleTickerProvider
           details.delta.dy / (size.height / 2),
         ),
       ),
-      onPanEnd: (details) => _runAnimation(details.velocity.pixelsPerSecond, size),
+      onPanEnd: (details) =>
+          _runAnimation(details.velocity.pixelsPerSecond, size),
       child: Align(
         alignment: _dragAlignment,
         child: Card(
