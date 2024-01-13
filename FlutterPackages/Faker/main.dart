@@ -33,11 +33,13 @@ class FakerExample extends StatefulWidget {
 }
 
 class _FakerExampleState extends State<FakerExample> {
-  TextEditingController firstNameTextEditingController = TextEditingController();
+  TextEditingController firstNameTextEditingController =
+      TextEditingController();
   TextEditingController emailTextEditingController = TextEditingController();
   TextEditingController addressTextEditingController = TextEditingController();
   TextEditingController ipv6TextEditingController = TextEditingController();
-  TextEditingController phoneNumberTextEditingController = TextEditingController();
+  TextEditingController phoneNumberTextEditingController =
+      TextEditingController();
   TextEditingController sportTextEditingController = TextEditingController();
   TextEditingController vehicleTextEditingController = TextEditingController();
   TextEditingController currencyTextEditingController = TextEditingController();
@@ -48,6 +50,9 @@ class _FakerExampleState extends State<FakerExample> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.deepPurple[200],
+        foregroundColor: Colors.white,
         title: const Text('Faker Example'),
       ),
       body: ListView(
@@ -55,47 +60,57 @@ class _FakerExampleState extends State<FakerExample> {
         children: [
           TextFormField(
             controller: firstNameTextEditingController,
-            decoration: const InputDecoration(labelText: 'Name', border: border),
+            decoration:
+                const InputDecoration(labelText: 'Name', border: border),
           ),
           const SizedBox(height: 20),
           TextFormField(
             controller: emailTextEditingController,
-            decoration: const InputDecoration(labelText: 'Email', border: border),
+            decoration:
+                const InputDecoration(labelText: 'Email', border: border),
           ),
           const SizedBox(height: 20),
           TextFormField(
             controller: addressTextEditingController,
-            decoration: const InputDecoration(labelText: 'Address', border: border),
+            decoration:
+                const InputDecoration(labelText: 'Address', border: border),
           ),
           const SizedBox(height: 20),
           TextFormField(
             controller: ipv6TextEditingController,
-            decoration: const InputDecoration(labelText: 'IPV6', border: border),
+            decoration:
+                const InputDecoration(labelText: 'IPV6', border: border),
           ),
           const SizedBox(height: 20),
           TextFormField(
             controller: sportTextEditingController,
-            decoration: const InputDecoration(labelText: 'Sport', border: border),
+            decoration:
+                const InputDecoration(labelText: 'Sport', border: border),
           ),
           const SizedBox(height: 20),
           TextFormField(
             controller: currencyTextEditingController,
-            decoration: const InputDecoration(labelText: 'Currency', border: border),
+            decoration:
+                const InputDecoration(labelText: 'Currency', border: border),
           ),
           const SizedBox(height: 20),
           TextFormField(
             controller: vehicleTextEditingController,
-            decoration: const InputDecoration(labelText: 'Vehicle', border: border),
+            decoration:
+                const InputDecoration(labelText: 'Vehicle', border: border),
           ),
           const SizedBox(height: 20),
           ElevatedButton(
               onPressed: () => setFeilds(),
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue,
+                backgroundColor: Colors.deepPurple[300],
                 foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+                minimumSize: const Size(double.infinity, 50),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.0)),
               ),
-              child: const Text('Add Fields')),
+              child: const Text('Add Fields',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500))),
         ],
       ),
     );
