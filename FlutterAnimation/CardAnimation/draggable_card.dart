@@ -1,5 +1,33 @@
+//
+// Draggable Card Animation in Flutter
+//
+// Created by: Ravi Patel
+// Instagram: @bugs_fixes (https://www.instagram.com/bugs_fixes)
+//
+
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        colorSchemeSeed: Colors.deepPurple,
+      ),
+      home: const DraggableExample(),
+    );
+  }
+}
 
 class DraggableExample extends StatefulWidget {
   const DraggableExample({super.key});
@@ -20,13 +48,14 @@ class _DraggableExampleState extends State<DraggableExample> {
           height: 150,
           width: 150,
           decoration: BoxDecoration(
-            color: Colors.blueGrey[700],
+            // color: Colors.deepPurple[400],
+            color: Theme.of(context).colorScheme.primary.withOpacity(0.8),
             borderRadius: const BorderRadius.all(
               Radius.circular(5),
             ),
             boxShadow: [
               BoxShadow(
-                color: Colors.blueGrey.withOpacity(0.7),
+                color: Colors.deepPurple[200]!,
                 blurRadius: 30,
               ),
             ],
