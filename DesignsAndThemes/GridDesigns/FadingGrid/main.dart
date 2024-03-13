@@ -1,0 +1,182 @@
+//
+// Fading Grid Design
+//
+// Created by: Ravi Patel
+// Instagram: @bugs_fixes (https://www.instagram.com/bugs_fixes)
+//
+
+import 'package:flutter/material.dart';
+import 'dart:math' as math;
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Designs',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      home: const FadingGrid(),
+    );
+  }
+}
+
+class FadingGrid extends StatefulWidget {
+  const FadingGrid({Key? key}) : super(key: key);
+
+  @override
+  State<FadingGrid> createState() => _FadingGridState();
+}
+
+class _FadingGridState extends State<FadingGrid>
+    with SingleTickerProviderStateMixin {
+  Offset location = Offset.zero;
+  late AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 5), // Adjust animation duration
+    )..repeat(); // Repeat the animation
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
+    int squareAmountHorizontal = screenSize.width ~/ 32.7;
+    double squareContainerSize = screenSize.width / squareAmountHorizontal;
+    double squarePadding = 10;
+    double squareSize = squareContainerSize - squarePadding;
+    int squareAmountVertical =
+        (screenSize.height / squareContainerSize).floor() - 3;
+
+    return Scaffold(
+      backgroundColor: Colors.black,
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        foregroundColor: Colors.white,
+        title: const Text('Fading Grid'),
+      ),
+      body: Center(
+        child: GestureDetector(
+          onPanDown: (details) {
+            location = details.globalPosition;
+            setState(() {});
+          },
+          onPanUpdate: (details) {
+            location = details.globalPosition;
+            setState(() {});
+          },
+          onPanEnd: (details) {
+            location = Offset.zero;
+            setState(() {});
+          },
+          child: AnimatedBuilder(
+              animation: _controller,
+              builder: (context, child) {
+                double gradientRotation = _controller.value * 2 * math.pi;
+                return SizedBox(
+                  width: screenSize.width,
+                  height: squareAmountVertical * squareContainerSize,
+                  child: CustomPaint(
+                    size: Size(screenSize.width,
+                        squareAmountVertical * squareContainerSize),
+                    painter: _GridPainter(
+                      squareAmountHorizontal: squareAmountHorizontal,
+                      squareAmountVertical: squareAmountVertical,
+                      squareContainerSize: squareContainerSize,
+                      padding: squarePadding,
+                      squareSize: squareSize,
+                      location: location,
+                      gradientRotation: gradientRotation,
+                    ),
+                  ),
+                );
+              }),
+        ),
+      ),
+    );
+  }
+}
+
+class _GridPainter extends CustomPainter {
+  final int squareAmountHorizontal;
+  final int squareAmountVertical;
+  final double squareContainerSize;
+  final double padding;
+  final double squareSize;
+  final Offset location;
+  double gradientRotation;
+
+  _GridPainter({
+    required this.squareAmountHorizontal,
+    required this.squareAmountVertical,
+    required this.squareContainerSize,
+    required this.padding,
+    required this.squareSize,
+    required this.location,
+    required this.gradientRotation,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    var gradient = SweepGradient(
+      colors: const [Colors.cyan, Colors.pink, Colors.yellow, Colors.cyan],
+      transform: GradientRotation(gradientRotation),
+    );
+
+    Rect canvasRect = Rect.fromCenter(
+      center: size.center(Offset.zero),
+      width: size.width / 2,
+      height: size.height / 2,
+    );
+
+    Paint paint = Paint()..shader = gradient.createShader(canvasRect);
+
+    for (int i = 0; i < squareAmountHorizontal; i++) {
+      for (int j = 0; j < squareAmountVertical; j++) {
+        final rectPos = Offset(
+          i * squareContainerSize + padding * 2,
+          j * squareContainerSize + padding * 2,
+        );
+
+        final a = location.dx - rectPos.dx;
+        final b = location.dy - rectPos.dy;
+        final root = math.sqrt((a * a) + (b * b));
+        final diagonalValue =
+            math.sqrt((size.width * size.width) + (size.height * size.height));
+        final scale = root / (diagonalValue / 2);
+        final modifiedScale = location == Offset.zero ? 1 : (1 - scale * 1.5);
+        final fadingScale = modifiedScale > 0 ? modifiedScale : 0;
+        Rect rect = Rect.fromCenter(
+          center: rectPos,
+          height: fadingScale * squareSize,
+          width: fadingScale * squareSize,
+        );
+        canvas.drawRRect(
+            RRect.fromRectAndRadius(rect, const Radius.circular(4)), paint);
+      }
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;
+  }
+}
