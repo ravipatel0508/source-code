@@ -1,3 +1,10 @@
+//
+// Reorderable ListView
+//
+// Created by: Ravi Patel
+// Instagram: @bugs_fixes (https://www.instagram.com/bugs_fixes)
+//
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,35 +20,40 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blueGrey,
+        useMaterial3: true,
+        colorSchemeSeed: Colors.green,
       ),
-      home: const ReorderableListViewExample(title: 'Reorderable ListView Example'),
+      home: const ReorderableListViewExample(
+          title: 'Reorderable ListView Example'),
     );
   }
 }
 
 class ReorderableListViewExample extends StatefulWidget {
-  const ReorderableListViewExample({Key? key, required this.title}) : super(key: key);
+  const ReorderableListViewExample({Key? key, required this.title})
+      : super(key: key);
 
   final String title;
 
   @override
-  State<ReorderableListViewExample> createState() => _ReorderableListViewExampleState();
+  State<ReorderableListViewExample> createState() =>
+      _ReorderableListViewExampleState();
 }
 
-class _ReorderableListViewExampleState extends State<ReorderableListViewExample> {
+class _ReorderableListViewExampleState
+    extends State<ReorderableListViewExample> {
   final List<int> _items = List<int>.generate(50, (int index) => index);
 
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    final Color oddItemColor = colorScheme.primary.withOpacity(0.05);
-    final Color evenItemColor = colorScheme.primary.withOpacity(0.15);
+    final Color oddItemColor = colorScheme.primary.withOpacity(0.15);
+    final Color evenItemColor = colorScheme.primary.withOpacity(0.05);
 
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
-        backgroundColor: Colors.blueGrey,
+        backgroundColor: Colors.green[100],
         centerTitle: true,
       ),
       body: ReorderableListView(
