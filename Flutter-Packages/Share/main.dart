@@ -88,8 +88,10 @@ class SharingExample extends StatelessWidget {
                       }
                     }
                   },
-                  child: const Text('Share',
-                      style: TextStyle(fontSize: 20, color: Colors.black)),
+                  child: const Text(
+                    'Share',
+                    style: TextStyle(fontSize: 20, color: Colors.black),
+                  ),
                 ),
               ],
             ),
