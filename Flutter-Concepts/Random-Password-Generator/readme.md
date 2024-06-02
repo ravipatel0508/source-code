@@ -1,2 +1,5 @@
 # Random Password Generator in Flutter
-<img src="https://user-images.githubusercontent.com/63658662/188697294-f5b944fc-b62b-47bc-87e3-98697f7929f1.png" height=450>
+
+This is a simple example of how to generate a random password in Flutter. The `Random` class is used to generate random numbers. The `String` class is used to generate a random password.
+
+### [Click here to see the output](https://www.instagram.com/reel/C7OBCObyqmZ/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==)
