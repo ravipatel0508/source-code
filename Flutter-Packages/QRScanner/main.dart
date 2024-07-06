@@ -1,5 +1,5 @@
 //dependencies:
-//     qr_flutter: ^4.0.0
+//     qr_flutter: latest
 
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -40,8 +40,11 @@ class _QrExampleState extends State<QrExample> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.green[50],
       appBar: AppBar(
         title: const Text('QR Example'),
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -50,12 +53,18 @@ class _QrExampleState extends State<QrExample> {
             children: [
               RepaintBoundary(
                 key: qrKey,
-                child: QrImage(
+                child: QrImageView(
                   data: qrData,
                   version: QrVersions.auto,
                   size: 300.0,
-                  dataModuleStyle: const QrDataModuleStyle(dataModuleShape: QrDataModuleShape.circle, color: Colors.black),
-                  eyeStyle: const QrEyeStyle(eyeShape: QrEyeShape.square, color: Colors.black),
+                  dataModuleStyle: const QrDataModuleStyle(
+                    dataModuleShape: QrDataModuleShape.circle,
+                    color: Colors.black,
+                  ),
+                  eyeStyle: QrEyeStyle(
+                    eyeShape: QrEyeShape.circle,
+                    color: Colors.green[300],
+                  ),
                 ),
               ),
               const SizedBox(height: 20.0),
@@ -65,7 +74,7 @@ class _QrExampleState extends State<QrExample> {
                   hintText: 'Enter your data',
                   border: OutlineInputBorder(
                     gapPadding: 5.0,
-                    borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                    borderRadius: BorderRadius.all(Radius.circular(16.0)),
                     borderSide: BorderSide(
                       color: Colors.black,
                       width: 5.0,
@@ -82,10 +91,10 @@ class _QrExampleState extends State<QrExample> {
                   setState(() => qrData = qrDataController.text);
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blueGrey,
+                  backgroundColor: Colors.green,
                   foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
+                    borderRadius: BorderRadius.circular(8.0),
                   ),
                 ),
                 child: const Text('Generate QR'),
