@@ -47,7 +47,7 @@ git clone https://github.com/ravipatel0508/source-code.git
 2. **Navigate to a Specific Topic:**
 
 ```bash
-cd source-code/Flutter-Concepts/Async-Await
+cd source-code/Flutter-Packages/Faker
 ```
 
 3. **Open with Your Preferred IDE:**
